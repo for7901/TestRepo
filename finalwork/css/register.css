@@ -1,0 +1,65 @@
+/* register.css */
+/* 注册页面特有样式，基础样式复用login.css */
+
+/* 表单复选框样式 */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  color: #666;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.form-checkbox input {
+  margin-right: 8px;
+}
+
+.terms-link {
+  color: var(--primary-color);
+}
+
+/* 密码强度提示样式 */
+.password-strength {
+  margin-top: 5px;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+  display: none;
+}
+
+.password-strength.show {
+  display: block;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.strength-bar.weak {
+  width: 33%;
+  background-color: #ff4d4f;
+}
+
+.strength-bar.medium {
+  width: 66%;
+  background-color: #faad14;
+}
+
+.strength-bar.strong {
+  width: 100%;
+  background-color: #52c41a;
+}
+
+.strength-text {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #666;
+  display: none;
+}
+
+.strength-text.show {
+  display: block;
+}

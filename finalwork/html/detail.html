@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花百科 - 详情</title>
+  <!-- 引入样式文件 -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/detail.css">
+  <!-- 引入图标库 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <style>
+    /* 新增标签模块样式 */
+    .tab-module {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .tab-module:hover {
+      transform: translateY(-3px);
+    }
+    
+    .tab-module-header {
+      background: linear-gradient(135deg, var(--primary-color), #4caf50);
+      color: white;
+      padding: 18px 25px;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .tab-module-header i {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+    
+    .tab-module-content {
+      padding: 25px;
+      line-height: 1.8;
+      color: #333;
+    }
+    
+    /* 内容区域样式优化 */
+    .intro-content p {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+    
+    .care-item {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #eee;
+    }
+    
+    .care-item:last-child {
+      border-bottom: none;
+    }
+    
+    .care-item strong {
+      color: var(--primary-color);
+      font-size: 16px;
+      min-width: 80px;
+      display: inline-block;
+    }
+    
+    .disease-item {
+      margin-bottom: 25px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    .disease-item h4 {
+      color: #d32f2f;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    
+    .disease-item p {
+      margin-bottom: 8px;
+    }
+    
+    /* 评论区样式优化 */
+    .comment-form {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .comment-input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      min-height: 120px;
+      resize: vertical;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    .comment-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+    
+    .comment-btn {
+      align-self: flex-end;
+      padding: 10px 25px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .comment-btn:hover {
+      background-color: #3d8b40;
+    }
+    
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .comment-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    
+    .comment-avatar img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .comment-content {
+      flex: 1;
+    }
+    
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .comment-name {
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .comment-time {
+      color: #999;
+      font-size: 13px;
+    }
+    
+    .comment-text {
+      margin-bottom: 10px;
+      color: #555;
+    }
+    
+    .comment-actions .like-btn {
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+    }
+    
+    .comment-actions .like-btn:hover {
+      color: #f44336;
+    }
+    
+    .no-data {
+      text-align: center;
+      padding: 40px 0;
+      color: #999;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    /* 相关花卉推荐样式优化 */
+    .related-flowers {
+      margin-top: 40px;
+    }
+    
+    .flowers-list {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: thin;
+    }
+    
+    .flowers-list::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .flowers-list::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 3px;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      .tab-module-header {
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+      
+      .tab-module-content {
+        padding: 20px;
+      }
+      
+      .comment-item {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .comment-avatar {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">花百科</a>
+      <div class="hamburger" id="hamburger">
+        <i class="fa fa-bars"></i>
+      </div>
+      <ul class="nav-list" id="navList">
+        <li class="nav-item"><a href="index.html" class="nav-link" style="color: var(--primary-color);">首页</a></li>
+        <li class="nav-item"><a href="category.html" class="nav-link">花卉分类</a></li>
+        <li class="nav-item"><a href="knowledge.html" class="nav-link">养花知识</a></li>
+        <li class="nav-item"><a href="search.html" class="nav-link">搜索</a></li>
+        <!-- 登录/注册按钮会通过JS动态生成 -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 搜索区域 -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="搜花名、搜病症、搜养护方法...">
+        <button class="btn search-btn" id="searchBtn">
+          <i class="fa fa-search"></i> 搜索
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 面包屑导航 -->
+  <nav class="breadcrumb">
+    <div class="container">
+      <a href="index.html">首页</a>
+      <i class="fa fa-angle-right"></i>
+      <a href="category.html?type=" id="categoryLink">分类</a>
+      <i class="fa fa-angle-right"></i>
+      <span id="flowerNameBreadcrumb">花卉名称</span>
+    </div>
+  </nav>
+
+  <!-- 花卉详情内容 -->
+  <main class="detail-main">
+    <div class="container">
+      <div class="detail-container">
+        <!-- 左侧花卉图片 -->
+        <div class="detail-left">
+          <div class="main-img">
+            <img src="" alt="" id="mainImg">
+          </div>
+          <div class="thumb-img-list" id="thumbImgList">
+            <!-- 缩略图将通过JS动态生成 -->
+          </div>
+        </div>
+
+        <!-- 右侧花卉信息 -->
+        <div class="detail-right">
+          <h1 id="flowerTitle">花卉名称</h1>
+          <div class="flower-tags" id="flowerTags">
+            <!-- 标签将通过JS动态生成 -->
+          </div>
+          <div class="flower-info">
+            <div class="info-item">
+              <span class="info-label">学名：</span>
+              <span class="info-value" id="scientificName"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">科属：</span>
+              <span class="info-value" id="family"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">花期：</span>
+              <span class="info-value" id="bloomingPeriod"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">原产地：</span>
+              <span class="info-value" id="origin"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">花语：</span>
+              <span class="info-value" id="flowerLanguage"></span>
+            </div>
+          </div>
+          <div class="flower-actions">
+            <button class="btn collect-btn" id="collectBtn">
+              <i class="fa fa-heart-o"></i> 收藏
+            </button>
+            <button class="btn share-btn">
+              <i class="fa fa-share-alt"></i> 分享
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 花卉详情标签模块 -->
+      
+      <!-- 植物介绍模块 -->
+      <div class="tab-module" id="introModule">
+        <div class="tab-module-header" data-tab="intro">
+          <i class="fa fa-info-circle"></i>
+          <span>植物介绍</span>
+        </div>
+        <div class="tab-module-content intro-content active" id="introTab">
+          <!-- 内容将通过JS动态生成 -->
+        </div>
+      </div>
+
+      <!-- 养护方法模块 -->
+      <div class="tab-module" id="careModule">
+        <div class="tab-module-header" data-tab="care">
+          <i class="fa fa-leaf"></i>
+          <span>养护方法</span>
+        </div>
+        <div class="tab-module-content" id="careTab">
+          <!-- 内容将通过JS动态生成 -->
+        </div>
+      </div>
+
+      <!-- 病虫害防治模块 -->
+      <div class="tab-module" id="diseaseModule">
+        <div class="tab-module-header" data-tab="disease">
+          <i class="fa fa-bug"></i>
+          <span>病虫害防治</span>
+        </div>
+        <div class="tab-module-content" id="diseaseTab">
+          <!-- 内容将通过JS动态生成 -->
+        </div>
+      </div>
+
+      <!-- 用户评论模块 -->
+      <div class="tab-module" id="commentModule">
+        <div class="tab-module-header" data-tab="comment">
+          <i class="fa fa-comments"></i>
+          <span>用户评论</span>
+        </div>
+        <div class="tab-module-content" id="commentTab">
+          <div class="comment-form">
+            <textarea placeholder="分享你的养花经验..." class="comment-input" id="commentInput"></textarea>
+            <button class="btn comment-btn" id="commentBtn">发表评论</button>
+          </div>
+          <div class="comment-list" id="commentList">
+            <!-- 动态渲染评论 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 相关花卉推荐 -->
+      <div class="related-flowers">
+        <div class="section-header">
+          <h2>相关花卉推荐</h2>
+          <div class="line" style="background: linear-gradient(to right, var(--primary-color), transparent);"></div>
+        </div>
+        <div class="flowers-list" id="relatedFlowers">
+          <!-- 相关花卉将通过JS动态生成 -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 回到顶部按钮 -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-column">
+        <h3 class="footer-title">关于花百科</h3>
+        <!-- 其他页脚内容保持不变 -->
+      </div>
+    </div>
+  </footer>
+
+  <!-- 引入脚本 -->
+  <script src="../javascript/common.js"></script>
+  <script src="../javascript/flowerData.js"></script>
+  <script src="../javascript/detail.js"></script>
+  <script>
+    // 修改标签切换逻辑以适应新结构
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化标签页切换
+      function initTabs() {
+        const tabHeaders = document.querySelectorAll('.tab-module-header');
+        tabHeaders.forEach(header => {
+          header.addEventListener('click', function() {
+            // 移除所有活跃状态
+            document.querySelectorAll('.tab-module-content').forEach(content => {
+              content.classList.remove('active');
+            });
+            
+            // 添加当前活跃状态
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(`${tabId}Tab`).classList.add('active');
+          });
+        });
+      }
+      
+      // 覆盖原有的initTabs函数
+      window.initTabs = initTabs;
+    });
+  </script>
+</body>
+</html>

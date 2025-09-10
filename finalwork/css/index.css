@@ -1,0 +1,180 @@
+/* 轮播图样式 */
+.banner {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  margin: 20px 0;
+}
+
+.banner-container {
+  position: relative;
+  height: 100%;
+}
+
+.banner-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+
+.banner-item.active {
+  display: block;
+  animation: fadeIn 1s ease;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--white);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.banner-content h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.banner-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* 轮播控制按钮 */
+.banner-prev, .banner-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0,0,0,0.3);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.banner-prev {
+  left: 20px;
+}
+
+.banner-next {
+  right: 20px;
+}
+
+.banner-prev:hover, .banner-next:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* 轮播指示器 */
+.banner-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicator.active {
+  background-color: var(--white);
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* 热门花卉和知识区域 */
+.section-header {
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  margin-right: 15px;
+  color: var(--text-color);
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+}
+
+.more-link {
+  color: var(--primary-color);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.flowers-list, .knowledge-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* 回到顶部按钮 */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .banner {
+    height: 300px;
+  }
+  
+  .banner-content h2 {
+    font-size: 28px;
+  }
+  
+  .banner-content p {
+    font-size: 14px;
+  }
+  
+  .flowers-list, .knowledge-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  
+  .card-img {
+    height: 120px;
+  }
+}

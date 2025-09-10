@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花百科 - 花卉分类</title>
+  <!-- 引入样式文件 -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/category.css">
+  <!-- 引入图标库 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">花百科</a>
+      <div class="hamburger" id="hamburger">
+        <i class="fa fa-bars"></i>
+      </div>
+     <ul class="nav-list" id="navList">
+  <li class="nav-item"><a href="index.html" class="nav-link" style="color: var(--primary-color);">首页</a></li>
+  <li class="nav-item"><a href="category.html" class="nav-link">花卉分类</a></li>
+  <li class="nav-item"><a href="knowledge.html" class="nav-link">养花知识</a></li>
+  <li class="nav-item"><a href="search.html" class="nav-link">搜索</a></li>
+  <!-- 登录/注册按钮会通过JS动态生成 -->
+</ul>
+    </div>
+  </nav>
+
+  <!-- 搜索区域 -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="搜花名、搜病症、搜养护方法...">
+        <button class="btn search-btn" id="searchBtn">
+          <i class="fa fa-search"></i> 搜索
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类筛选区域 -->
+  <main class="category-main">
+    <div class="container">
+      <div class="category-filters">
+        <button class="filter-btn active" data-type="all">全部花卉</button>
+        <button class="filter-btn" data-type="草本">草本植物</button>
+        <button class="filter-btn" data-type="木本">木本植物</button>
+        <button class="filter-btn" data-type="多肉">多肉植物</button>
+      </div>
+
+      <!-- 花卉列表 -->
+      <div class="section-header">
+        <h2 id="categoryTitle">全部花卉</h2>
+        <div class="line" style="background: linear-gradient(to right, var(--primary-color), transparent);"></div>
+      </div>
+      
+      <div class="flowers-grid" id="flowersGrid">
+        <!-- 花卉卡片将通过JS动态生成 -->
+        <div class="flower-card">
+          <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.XgSJhMgrp8Jzkzm5coVQLwHaE7?w=244&h=180&c=7&r=0&o=5&cb=ucfimgc2&dpr=2&pid=1.7" alt="玫瑰" class="flower-img">
+          <div class="flower-info">
+            <h3 class="flower-name">玫瑰</h3>
+            <span class="flower-tag">木本植物</span>
+            <p class="flower-desc">蔷薇科蔷薇属落叶灌木，花色丰富，香气浓郁</p>
+            <a href="detail.html?flower=玫瑰" class="btn btn-detail">查看详情</a>
+          </div>
+        </div>
+        
+        <div class="flower-card">
+          <img src="https://img95.699pic.com/photo/50771/3184.jpg_wh860.jpg" alt="薰衣草" class="flower-img">
+          <div class="flower-info">
+            <h3 class="flower-name">薰衣草</h3>
+            <span class="flower-tag">草本植物</span>
+            <p class="flower-desc">唇形科薰衣草属植物，花色紫色，香气浓郁</p>
+            <a href="detail.html?flower=薰衣草" class="btn btn-detail">查看详情</a>
+          </div>
+        </div>
+        
+        <div class="flower-card">
+          <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.mUkmehGdkIzuPSkGjAkZuwHaE8?w=291&h=194&c=7&r=0&o=7&cb=ucfimgc2&dpr=2&pid=1.7&rm=3" alt="多肉植物" class="flower-img">
+          <div class="flower-info">
+            <h3 class="flower-name">多肉植物</h3>
+            <span class="flower-tag">多肉植物</span>
+            <p class="flower-desc">营养器官肥厚多汁的植物，种类繁多，形态各异</p>
+            <a href="detail.html?flower=多肉植物" class="btn btn-detail">查看详情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-column">
+        <h3 class="footer-title">关于花百科</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="#" class="footer-link">平台介绍</a></li>
+          <li class="footer-item"><a href="#" class="footer-link">联系我们</a></li>
+          <li class="footer-item"><a href="#" class="footer-link">加入我们</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-title">花卉分类</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="category.html?type=草本" class="footer-link">草本植物</a></li>
+          <li class="footer-item"><a href="category.html?type=木本" class="footer-link">木本植物</a></li>
+          <li class="footer-item"><a href="category.html?type=多肉" class="footer-link">多肉植物</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-title">养花知识</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="knowledge.html?tag=浇水" class="footer-link">浇水技巧</a></li>
+          <li class="footer-item"><a href="knowledge.html?tag=施肥" class="footer-link">施肥方法</a></li>
+          <li class="footer-item"><a href="knowledge.html?tag=病虫害" class="footer-link">病虫害防治</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3 class="footer-title">关注我们</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="#" class="footer-link"><i class="fa fa-weixin"></i> 微信公众号</a></li>
+          <li class="footer-item"><a href="#" class="footer-link"><i class="fa fa-weibo"></i> 官方微博</a></li>
+          <li class="footer-item"><a href="#" class="footer-link"><i class="fa fa-apple"></i> 下载APP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">© 2025 花百科 版权所有</div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button class="back-to-top" id="backToTop" style="display: none;">
+    <i class="fa fa-angle-up"></i>
+  </button>
+
+  <!-- 引入脚本文件 -->
+  <script src="../javascript/common.js"></script>
+  <script src="../javascript/dom.js"></script>
+  <script src="../javascript/category.js"></script>
+</body>
+</html>

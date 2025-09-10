@@ -1,0 +1,121 @@
+/* 详情页布局优化 */
+.detail-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  align-items: flex-start; /* 顶部对齐 */
+}
+
+/* 左侧图片区域 */
+.detail-left {
+  flex: 0 0 40%; /* 图片占比40% */
+  max-width: 500px; /* 最大宽度限制 */
+}
+
+.main-img {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.main-img img {
+  width: 100%;
+  height: auto; /* 保持图片比例 */
+  object-fit: cover;
+  display: block;
+}
+
+.thumb-img-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.thumb-img-list img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.thumb-img-list img:hover,
+.thumb-img-list img.active {
+  border-color: var(--primary-color);
+}
+
+/* 右侧介绍区域 */
+.detail-right {
+  flex: 1; /* 文字区域占比60% */
+  min-width: 0; /* 防止内容溢出 */
+}
+
+/* 响应式调整 - 小屏幕堆叠显示 */
+@media (max-width: 768px) {
+  .detail-container {
+    flex-direction: column;
+  }
+  
+  .detail-left {
+    flex: none;
+    width: 100%;
+    max-width: none;
+  }
+  
+  .main-img img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+  
+  .thumb-img-list img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* 中等屏幕调整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .detail-left {
+    flex: 0 0 35%;
+  }
+}
+/* 收藏按钮样式 */
+.flower-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.collect-btn {
+  background-color: #fff;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+}
+
+.collect-btn:hover {
+  background-color: #fff1f0;
+}
+
+.collect-btn.collected {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.collect-btn.collected:hover {
+  background-color: #f5222d;
+}
+
+.share-btn {
+  background-color: #f0f2f5;
+  color: #1890ff;
+  border: 1px solid #1890ff;
+}
+
+.share-btn:hover {
+  background-color: #e6f7ff;
+}
